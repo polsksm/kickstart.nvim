@@ -47,3 +47,7 @@ vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
+
+vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end)
+vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end)
+vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end)
