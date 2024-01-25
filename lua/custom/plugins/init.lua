@@ -26,5 +26,14 @@ return {
     { 'hrsh7th/nvim-cmp' },
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'L3MON4D3/LuaSnip' },
+    --[[{
+        -- rose-pine
+        'rose-pine/neovim',
+        name = 'rose-pine',
+        priority = 1000,
+        config = function()
+            vim.cmd.colorscheme 'rose-pine'
+        end,
+    },--]]
 
 }

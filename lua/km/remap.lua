@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = 'Current folder file explorer' })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -41,13 +41,11 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
-end)
+end, { desc = 'Source file' })
 
-vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end)
-vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end)
-vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end)
+vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { desc = 'Go to definition' })
+vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, { desc = 'Find references' })
+vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, { desc = 'Code actions' })
