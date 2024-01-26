@@ -49,3 +49,5 @@ end, { desc = 'Source file' })
 vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { desc = 'Go to definition' })
 vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, { desc = 'Find references' })
 vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, { desc = 'Code actions' })
+
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = 'Toggle undo tree' })
