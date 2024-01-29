@@ -43,10 +43,6 @@ vim.keymap.set("n", "<C-s>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left
 vim.keymap.set("n", "<leader>xm", "<cmd>!chmod +x %<CR>", { silent = true })
 
 
-vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
-end, { desc = 'Source file' })
-
 vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { desc = 'Go to definition' })
 vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, { desc = 'Find references' })
 vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, { desc = 'Code actions' })
