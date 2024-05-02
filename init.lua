@@ -189,7 +189,7 @@ require('lazy').setup({
     },
   },
 
-  {
+  --[[{
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
@@ -197,8 +197,10 @@ require('lazy').setup({
       vim.cmd.colorscheme 'onedark'
     end,
   },
+ --]]
 
-  --[[{
+  --[[
+  {
     -- rose-pine
     'rose-pine/neovim',
     name = 'rose-pine',
@@ -206,7 +208,8 @@ require('lazy').setup({
     config = function()
       vim.cmd.colorscheme 'rose-pine'
     end,
-  },--]]
+  },
+  --]]
 
   {
     -- Set lualine as statusline

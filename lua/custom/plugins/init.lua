@@ -38,7 +38,7 @@ return {
     },
     { 'skywind3000/asyncrun.vim' },
 
-    --[[{
+    {
         -- rose-pine
         'rose-pine/neovim',
         name = 'rose-pine',
@@ -46,6 +46,6 @@ return {
         config = function()
             vim.cmd.colorscheme 'rose-pine'
         end,
-    },--]]
+    },
 
 }
