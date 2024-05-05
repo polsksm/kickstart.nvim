@@ -48,3 +48,6 @@ vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, { de
 vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, { desc = 'Code actions' })
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = 'Toggle undo tree' })
+
+-- python
+vim.keymap.set("n", "<leader>r", ":!python3 %<CR>", { desc = 'Run python file' })
