@@ -432,9 +432,14 @@ vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by 
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>tk', require('telescope.builtin').keymaps, { desc = 'Telescope [K]eymaps' })
+
 vim.keymap.set("n", "<leader>gg", function()
-  vim.cmd("split | terminal lazygit")
+  --vim.cmd("split | terminal lazygit")
+  vim.cmd(":FloatermNew --height=0.9 --width=0.9 lazygit")
 end, { desc = "Open LazyGit" })
+
+
+
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
