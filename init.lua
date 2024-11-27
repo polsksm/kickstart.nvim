@@ -75,7 +75,51 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
-
+  'ThePrimeagen/git-worktree.nvim',
+  'nvim-lua/popup.nvim',
+  'nvim-lua/plenary.nvim',
+  'nvim-telescope/telescope.nvim',
+  'nvim-telescope/telescope-fzf-native.nvim',
+  {
+    dir = "/home/stlmuelk/.config/lazygit.nvim.git/main",
+    name = "lazygit.nvim",
+    lazy = false,
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("telescope").load_extension("lazygit")
+    end,
+  },
+  --[[
+  {
+    "kdheepak/lazygit.nvim",
+    lazy = false,
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("telescope").load_extension("lazygit")
+    end,
+  },
+--]]
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -110,6 +154,15 @@ require('lazy').setup({
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
     },
+  },
+
+  {
+    'akinsho/toggleterm.nvim',
+    config = function()
+      require("toggleterm").setup {
+        direction = "float", -- Ensure float terminal is enabled
+      }
+    end
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -432,13 +485,6 @@ vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by 
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>tk', require('telescope.builtin').keymaps, { desc = 'Telescope [K]eymaps' })
-
-vim.keymap.set("n", "<leader>gg", function()
-  --vim.cmd("split | terminal lazygit")
-  vim.cmd(":FloatermNew --height=0.9 --width=0.9 lazygit")
-end, { desc = "Open LazyGit" })
-
-
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
