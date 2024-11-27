@@ -16,3 +16,22 @@ lspconfig.clangd.setup({
             lspconfig.util.path.dirname(fname)
     end,
 })
+
+vim.api.nvim_create_autocmd("TermClose", {
+    pattern = "*lazygit*",
+    callback = function()
+        SyncWithWorktree()
+    end,
+})
+
+function SyncWithWorktree()
+    -- Get the current Git root directory
+    local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+    if vim.v.shell_error == 0 then
+        -- Change Neovim's working directory to the Git root
+        vim.cmd("cd " .. git_root)
+        print("Updated Neovim cwd to: " .. git_root)
+    else
+        print("Error: Could not find Git root")
+    end
+end
