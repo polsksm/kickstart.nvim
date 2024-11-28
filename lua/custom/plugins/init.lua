@@ -38,7 +38,7 @@ return {
     },
     { 'skywind3000/asyncrun.vim' },
 
-    {
+    --[[ {
         -- rose-pine
         'rose-pine/neovim',
         name = 'rose-pine',
@@ -47,9 +47,10 @@ return {
             vim.cmd.colorscheme 'rose-pine'
         end,
     },
+    --]]
     {
         "voldikss/vim-floaterm",
-        lazy = false,                          -- Ensure the plugin is eagerly loaded
+        lazy = false,                              -- Ensure the plugin is eagerly loaded
         config = function()
             vim.g.floaterm_keymap_toggle = "<F12>" -- Optional configuration
         end,
