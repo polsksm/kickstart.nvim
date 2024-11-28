@@ -250,7 +250,28 @@ require('lazy').setup({
       vim.cmd.colorscheme 'onedark'
     end,
   },
- --]]
+  --]]
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      style = "night",
+      on_colors = function(colors)
+        colors.terminal.blue = "#5d59d4"        -- New color value
+        colors.terminal.blue_bright = "#5d59d4" -- New color value
+        colors.terminal.cyan_bright = "#5d59d4" -- New color value
+        colors.terminal.cyan_bright = "#5d59d4" -- New color value
+      end,
+    },
+    config = function(_, opts)
+      require("tokyonight").setup(opts) -- Pass the opts to the setup function
+      vim.cmd("colorscheme tokyonight") -- Apply the colorscheme
+    end,
+  },
+
+
+
 
   --[[
   {
