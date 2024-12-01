@@ -180,7 +180,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim',       opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -255,16 +255,34 @@ require('lazy').setup({
       end,
     },
   },
-
-  --[[{
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
+  {
+    "zaldih/themery.nvim",
+    lazy = false,
     config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
+      require("themery").setup({
+        themes = {
+          { name = "onedark",               colorscheme = "onedark", },
+          { name = "rose-pine",             colorscheme = "rose-pine-main", },
+          { name = "rose-pine moon",        colorscheme = "rose-pine-moon", },
+          { name = "tokyonight-night",      colorscheme = "tokyonight-night", },
+          { name = "tokyonight-storm",      colorscheme = "tokyonight-storm", },
+          { name = "tokyonight-moon",       colorscheme = "tokyonight-moon", },
+          { name = "catppuccin mocha",      colorscheme = "catppuccin-mocha", },
+          { name = "catppuccin frappe",     colorscheme = "catppuccin-frappe", },
+          { name = "catppuccin macchiatto", colorscheme = "catppuccin-macchiato", },
+          { name = "kanagawa dragon",       colorscheme = "kanagawa-dragon", },
+          { name = "kanagawa-paper",        colorscheme = "kanagawa-paper", },
+          { name = "dracula",               colorscheme = "dracula", },
+        },
+        livePreview = true, -- Apply theme while picking. Default to true.
+      })
+    end
   },
-  --]]
+  { "sho-87/kanagawa-paper.nvim", lazy = false,        priority = 1000,                                       opts = {}, },
+  { "rebelot/kanagawa.nvim",      name = "kanagawa",   priority = 1000 },
+  { "Mofiqul/dracula.nvim",       name = "dracula",    priority = 1000 },
+  { "catppuccin/nvim",            name = "catppuccin", priority = 1000 },
+  { 'navarasu/onedark.nvim',      priority = 1000,     config = function() vim.cmd.colorscheme 'onedark' end, },
   {
     "folke/tokyonight.nvim",
     lazy = false,
@@ -283,11 +301,6 @@ require('lazy').setup({
       vim.cmd("colorscheme tokyonight") -- Apply the colorscheme
     end,
   },
-
-
-
-
-  --[[
   {
     -- rose-pine
     'rose-pine/neovim',
@@ -297,7 +310,7 @@ require('lazy').setup({
       vim.cmd.colorscheme 'rose-pine'
     end,
   },
-  --]]
+
 
   {
     -- Set lualine as statusline
@@ -324,7 +337,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',  opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {

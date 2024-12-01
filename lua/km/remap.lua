@@ -49,6 +49,7 @@ vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, { d
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = 'Toggle undo tree' })
 vim.keymap.set("n", "<leader>gn", "<cmd>Neogit kind=floating<CR>", { desc = 'Neogit' })
+vim.keymap.set("n", "<leader>tt", "<cmd>Themery<CR>", { desc = 'Themery' })
 
 -- python
 vim.keymap.set("n", "<leader>r", ":!python3 %<CR>", { desc = 'Run python file' })
