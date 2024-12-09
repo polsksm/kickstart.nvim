@@ -1,4 +1,3 @@
-print("Loading km.neotree.lua")
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
