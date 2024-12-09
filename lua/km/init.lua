@@ -15,6 +15,6 @@ lspconfig.clangd.setup({
     filetypes = { "c", "cpp", "objc", "objcpp", "pc" },
     root_dir = function(fname)
         return lspconfig.util.root_pattern("compile_commands.json")(fname) or
-            lspconfig.util.path.dirname(fname)
+            vim.fs.dirname(fname)
     end,
 })

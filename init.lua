@@ -67,53 +67,53 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- NOTE: First, some plugins that don't require any configuration
+    -- NOTE: First, some plugins that don't require any configuration
 
-  -- Git related plugins
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+    -- Git related plugins
+    'tpope/vim-fugitive',
+    'tpope/vim-rhubarb',
 
-  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
-  'ThePrimeagen/git-worktree.nvim',
-  'nvim-lua/popup.nvim',
-  'nvim-lua/plenary.nvim',
-  'nvim-telescope/telescope.nvim',
-  'nvim-telescope/telescope-fzf-native.nvim',
-  {
-    dir = "/home/stlmuelk/.config/lazygit.nvim.git/main",
-    name = "lazygit.nvim",
-    lazy = false,
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
+    -- Detect tabstop and shiftwidth automatically
+    'tpope/vim-sleuth',
+    'ThePrimeagen/git-worktree.nvim',
+    'nvim-lua/popup.nvim',
+    'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope.nvim',
+    'nvim-telescope/telescope-fzf-native.nvim',
+    {
+      dir = "/home/stlmuelk/.config/lazygit.nvim.git/main",
+      name = "lazygit.nvim",
+      lazy = false,
+      cmd = {
+        "LazyGit",
+        "LazyGitConfig",
+        "LazyGitCurrentFile",
+        "LazyGitFilter",
+        "LazyGitFilterCurrentFile",
+      },
+      dependencies = {
+        "nvim-telescope/telescope.nvim",
+        "nvim-lua/plenary.nvim",
+      },
+      config = function()
+        require("telescope").load_extension("lazygit")
+      end,
     },
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      require("telescope").load_extension("lazygit")
-    end,
-  },
-  {
-    "NeogitOrg/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim",  -- required
-      "sindrets/diffview.nvim", -- optional - Diff integration
+    {
+      "NeogitOrg/neogit",
+      dependencies = {
+        "nvim-lua/plenary.nvim", -- required
+        "sindrets/diffview.nvim", -- optional - Diff integration
 
-      -- Only one of these is needed.
-      "nvim-telescope/telescope.nvim", -- optional
-      "ibhagwan/fzf-lua",              -- optional
-      "echasnovski/mini.pick",         -- optional
+        -- Only one of these is needed.
+        "nvim-telescope/telescope.nvim", -- optional
+        "ibhagwan/fzf-lua",            -- optional
+        "echasnovski/mini.pick",       -- optional
+      },
+      config = true
     },
-    config = true
-  },
 
-  --[[
+    --[[
   {
     "kdheepak/lazygit.nvim",
     lazy = false,
@@ -134,255 +134,256 @@ require('lazy').setup({
     end,
   },
 --]]
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
-  {
-    -- LSP Configuration & Plugins
-    'neovim/nvim-lspconfig',
-    dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
+    -- NOTE: This is where your plugins related to LSP can be installed.
+    --  The configuration is done below. Search for lspconfig to find it below.
+    {
+      -- LSP Configuration & Plugins
+      'neovim/nvim-lspconfig',
+      dependencies = {
+        -- Automatically install LSPs to stdpath for neovim
+        { 'williamboman/mason.nvim', config = true },
+        'williamboman/mason-lspconfig.nvim',
 
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       opts = {} },
+        -- Useful status updates for LSP
+        -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+        { 'j-hui/fidget.nvim',       opts = {} },
 
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
-    },
-  },
-
-  {
-    -- Autocompletion
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-
-      -- Adds LSP completion capabilities
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-
-      -- Adds a number of user-friendly snippets
-      'rafamadriz/friendly-snippets',
-    },
-  },
-
-  {
-    'akinsho/toggleterm.nvim',
-    config = function()
-      require("toggleterm").setup {
-        direction = "float", -- Ensure float terminal is enabled
-      }
-    end
-  },
-
-  -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',       opts = {} },
-  {
-    -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
+        -- Additional lua configuration, makes nvim stuff amazing!
+        'folke/neodev.nvim',
       },
-      on_attach = function(bufnr)
-        local gs = package.loaded.gitsigns
-
-        local function map(mode, l, r, opts)
-          opts = opts or {}
-          opts.buffer = bufnr
-          vim.keymap.set(mode, l, r, opts)
-        end
-
-        -- Navigation
-        map({ 'n', 'v' }, ']c', function()
-          if vim.wo.diff then
-            return ']c'
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, desc = 'Jump to next hunk' })
-
-        map({ 'n', 'v' }, '[c', function()
-          if vim.wo.diff then
-            return '[c'
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, desc = 'Jump to previous hunk' })
-
-        -- Actions
-        -- visual mode
-        map('v', '<leader>hs', function()
-          gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = 'stage git hunk' })
-        map('v', '<leader>hr', function()
-          gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = 'reset git hunk' })
-        -- normal mode
-        map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
-        map('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
-        map('n', '<leader>hS', gs.stage_buffer, { desc = 'git Stage buffer' })
-        map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
-        map('n', '<leader>hR', gs.reset_buffer, { desc = 'git Reset buffer' })
-        map('n', '<leader>hp', gs.preview_hunk, { desc = 'preview git hunk' })
-        map('n', '<leader>hb', function()
-          gs.blame_line { full = false }
-        end, { desc = 'git blame line' })
-        map('n', '<leader>hd', gs.diffthis, { desc = 'git diff against index' })
-        map('n', '<leader>hD', function()
-          gs.diffthis '~'
-        end, { desc = 'git diff against last commit' })
-
-        -- Toggles
-        map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
-        map('n', '<leader>td', gs.toggle_deleted, { desc = 'toggle git show deleted' })
-
-        -- Text object
-        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
-      end,
     },
-  },
-  {
-    "zaldih/themery.nvim",
-    lazy = false,
-    config = function()
-      require("themery").setup({
-        themes = {
-          { name = "onedark",               colorscheme = "onedark", },
-          { name = "rose-pine",             colorscheme = "rose-pine-main", },
-          { name = "rose-pine moon",        colorscheme = "rose-pine-moon", },
-          { name = "tokyonight-night",      colorscheme = "tokyonight-night", },
-          { name = "tokyonight-storm",      colorscheme = "tokyonight-storm", },
-          { name = "tokyonight-moon",       colorscheme = "tokyonight-moon", },
-          { name = "catppuccin mocha",      colorscheme = "catppuccin-mocha", },
-          { name = "catppuccin frappe",     colorscheme = "catppuccin-frappe", },
-          { name = "catppuccin macchiatto", colorscheme = "catppuccin-macchiato", },
-          { name = "kanagawa dragon",       colorscheme = "kanagawa-dragon", },
-          { name = "kanagawa-paper",        colorscheme = "kanagawa-paper", },
-          { name = "dracula",               colorscheme = "dracula", },
+
+    {
+      -- Autocompletion
+      'hrsh7th/nvim-cmp',
+      dependencies = {
+        -- Snippet Engine & its associated nvim-cmp source
+        'L3MON4D3/LuaSnip',
+        'saadparwaiz1/cmp_luasnip',
+
+        -- Adds LSP completion capabilities
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-path',
+
+        -- Adds a number of user-friendly snippets
+        'rafamadriz/friendly-snippets',
+      },
+    },
+
+    {
+      'akinsho/toggleterm.nvim',
+      config = function()
+        require("toggleterm").setup {
+          direction = "float", -- Ensure float terminal is enabled
+        }
+      end
+    },
+
+    -- Useful plugin to show you pending keybinds.
+    { 'folke/which-key.nvim',       opts = {} },
+    {
+      -- Adds git related signs to the gutter, as well as utilities for managing changes
+      'lewis6991/gitsigns.nvim',
+      opts = {
+        -- See `:help gitsigns.txt`
+        signs = {
+          add = { text = '+' },
+          change = { text = '~' },
+          delete = { text = '_' },
+          topdelete = { text = '‾' },
+          changedelete = { text = '~' },
         },
-        livePreview = true, -- Apply theme while picking. Default to true.
-      })
-    end
-  },
-  { "sho-87/kanagawa-paper.nvim", lazy = false,        priority = 1000,                                       opts = {}, },
-  { "rebelot/kanagawa.nvim",      name = "kanagawa",   priority = 1000 },
-  { "Mofiqul/dracula.nvim",       name = "dracula",    priority = 1000 },
-  { "catppuccin/nvim",            name = "catppuccin", priority = 1000 },
-  { 'navarasu/onedark.nvim',      priority = 1000,     config = function() vim.cmd.colorscheme 'onedark' end, },
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      style = "night",
-      on_colors = function(colors)
-        colors.terminal.blue = "#5d59d4"        -- New color value
-        colors.terminal.blue_bright = "#5d59d4" -- New color value
-        colors.terminal.cyan_bright = "#5d59d4" -- New color value
-        colors.terminal.cyan_bright = "#5d59d4" -- New color value
-      end,
-    },
-    config = function(_, opts)
-      require("tokyonight").setup(opts) -- Pass the opts to the setup function
-      vim.cmd("colorscheme tokyonight") -- Apply the colorscheme
-    end,
-  },
-  {
-    -- rose-pine
-    'rose-pine/neovim',
-    name = 'rose-pine',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'rose-pine'
-    end,
-  },
+        on_attach = function(bufnr)
+          local gs = package.loaded.gitsigns
 
+          local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+          end
 
-  {
-    -- Set lualine as statusline
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    -- See `:help lualine.txt`
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = 'onedark',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
-  },
+          -- Navigation
+          map({ 'n', 'v' }, ']c', function()
+            if vim.wo.diff then
+              return ']c'
+            end
+            vim.schedule(function()
+              gs.next_hunk()
+            end)
+            return '<Ignore>'
+          end, { expr = true, desc = 'Jump to next hunk' })
 
-  {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
-    main = 'ibl',
-    opts = {},
-  },
+          map({ 'n', 'v' }, '[c', function()
+            if vim.wo.diff then
+              return '[c'
+            end
+            vim.schedule(function()
+              gs.prev_hunk()
+            end)
+            return '<Ignore>'
+          end, { expr = true, desc = 'Jump to previous hunk' })
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',  opts = {} },
+          -- Actions
+          -- visual mode
+          map('v', '<leader>hs', function()
+            gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          end, { desc = 'stage git hunk' })
+          map('v', '<leader>hr', function()
+            gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          end, { desc = 'reset git hunk' })
+          -- normal mode
+          map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
+          map('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
+          map('n', '<leader>hS', gs.stage_buffer, { desc = 'git Stage buffer' })
+          map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
+          map('n', '<leader>hR', gs.reset_buffer, { desc = 'git Reset buffer' })
+          map('n', '<leader>hp', gs.preview_hunk, { desc = 'preview git hunk' })
+          map('n', '<leader>hb', function()
+            gs.blame_line { full = false }
+          end, { desc = 'git blame line' })
+          map('n', '<leader>hd', gs.diffthis, { desc = 'git diff against index' })
+          map('n', '<leader>hD', function()
+            gs.diffthis '~'
+          end, { desc = 'git diff against last commit' })
 
-  -- Fuzzy Finder (files, lsp, etc)
-  {
-    'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-      -- Only load if `make` is available. Make sure you have the system
-      -- requirements installed.
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
-        build = 'make',
-        cond = function()
-          return vim.fn.executable 'make' == 1
+          -- Toggles
+          map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
+          map('n', '<leader>td', gs.toggle_deleted, { desc = 'toggle git show deleted' })
+
+          -- Text object
+          map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
         end,
       },
     },
-  },
-
-  {
-    -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+    {
+      "zaldih/themery.nvim",
+      lazy = false,
+      config = function()
+        require("themery").setup({
+          themes = {
+            { name = "onedark",               colorscheme = "onedark", },
+            { name = "rose-pine",             colorscheme = "rose-pine-main", },
+            { name = "rose-pine moon",        colorscheme = "rose-pine-moon", },
+            { name = "tokyonight-night",      colorscheme = "tokyonight-night", },
+            { name = "tokyonight-storm",      colorscheme = "tokyonight-storm", },
+            { name = "tokyonight-moon",       colorscheme = "tokyonight-moon", },
+            { name = "catppuccin mocha",      colorscheme = "catppuccin-mocha", },
+            { name = "catppuccin frappe",     colorscheme = "catppuccin-frappe", },
+            { name = "catppuccin macchiatto", colorscheme = "catppuccin-macchiato", },
+            { name = "kanagawa dragon",       colorscheme = "kanagawa-dragon", },
+            { name = "kanagawa-paper",        colorscheme = "kanagawa-paper", },
+            { name = "dracula",               colorscheme = "dracula", },
+          },
+          livePreview = true, -- Apply theme while picking. Default to true.
+        })
+      end
     },
-    build = ':TSUpdate',
+    { "sho-87/kanagawa-paper.nvim", lazy = false,        priority = 1000,                                       opts = {}, },
+    { "rebelot/kanagawa.nvim",      name = "kanagawa",   priority = 1000 },
+    { "Mofiqul/dracula.nvim",       name = "dracula",    priority = 1000 },
+    { "catppuccin/nvim",            name = "catppuccin", priority = 1000 },
+    { 'navarasu/onedark.nvim',      priority = 1000,     config = function() vim.cmd.colorscheme 'onedark' end, },
+    {
+      "folke/tokyonight.nvim",
+      lazy = false,
+      priority = 1000,
+      opts = {
+        style = "night",
+        on_colors = function(colors)
+          colors.terminal.blue = "#5d59d4"      -- New color value
+          colors.terminal.blue_bright = "#5d59d4" -- New color value
+          colors.terminal.cyan_bright = "#5d59d4" -- New color value
+          colors.terminal.cyan_bright = "#5d59d4" -- New color value
+        end,
+      },
+      config = function(_, opts)
+        require("tokyonight").setup(opts) -- Pass the opts to the setup function
+        vim.cmd("colorscheme tokyonight") -- Apply the colorscheme
+      end,
+    },
+    {
+      -- rose-pine
+      'rose-pine/neovim',
+      name = 'rose-pine',
+      priority = 1000,
+      config = function()
+        vim.cmd.colorscheme 'rose-pine'
+      end,
+    },
+
+
+    {
+      -- Set lualine as statusline
+      'nvim-lualine/lualine.nvim',
+      dependencies = { 'nvim-tree/nvim-web-devicons' },
+      -- See `:help lualine.txt`
+      opts = {
+        options = {
+          icons_enabled = false,
+          theme = 'onedark',
+          component_separators = '|',
+          section_separators = '',
+        },
+      },
+    },
+
+    {
+      -- Add indentation guides even on blank lines
+      'lukas-reineke/indent-blankline.nvim',
+      -- Enable `lukas-reineke/indent-blankline.nvim`
+      -- See `:help ibl`
+      main = 'ibl',
+      opts = {},
+    },
+
+    -- "gc" to comment visual regions/lines
+    { 'numToStr/Comment.nvim',  opts = {} },
+
+    -- Fuzzy Finder (files, lsp, etc)
+    {
+      'nvim-telescope/telescope.nvim',
+      branch = '0.1.x',
+      dependencies = {
+        'nvim-lua/plenary.nvim',
+        -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+        -- Only load if `make` is available. Make sure you have the system
+        -- requirements installed.
+        {
+          'nvim-telescope/telescope-fzf-native.nvim',
+          -- NOTE: If you are having trouble with this installation,
+          --       refer to the README for telescope-fzf-native for more instructions.
+          build = 'make',
+          cond = function()
+            return vim.fn.executable 'make' == 1
+          end,
+        },
+      },
+    },
+
+    {
+      -- Highlight, edit, and navigate code
+      'nvim-treesitter/nvim-treesitter',
+      dependencies = {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+      },
+      build = ':TSUpdate',
+    },
+
+    -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
+    --       These are some example plugins that I've included in the kickstart repository.
+    --       Uncomment any of the lines below to enable them.
+    require 'kickstart.plugins.autoformat',
+    -- require 'kickstart.plugins.debug',
+
+    -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+    --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
+    --    up-to-date with whatever is in the kickstart repo.
+    --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
+    --
+    --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
+    { import = 'custom.plugins' },
   },
-
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
-  require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
-
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the kickstart repo.
-  --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --
-  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  { import = 'custom.plugins' },
-}, {})
+  {})
 
 
 -- [[ Setting options ]]
@@ -801,7 +802,7 @@ cmp.setup {
 }
 
 
-require("km")
+  require("km")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
