@@ -81,34 +81,15 @@ require('lazy').setup({
     'nvim-telescope/telescope.nvim',
     'nvim-telescope/telescope-fzf-native.nvim',
     {
-      dir = "/home/stlmuelk/.config/lazygit.nvim.git/main",
-      name = "lazygit.nvim",
-      lazy = false,
-      cmd = {
-        "LazyGit",
-        "LazyGitConfig",
-        "LazyGitCurrentFile",
-        "LazyGitFilter",
-        "LazyGitFilterCurrentFile",
-      },
-      dependencies = {
-        "nvim-telescope/telescope.nvim",
-        "nvim-lua/plenary.nvim",
-      },
-      config = function()
-        require("telescope").load_extension("lazygit")
-      end,
-    },
-    {
       "NeogitOrg/neogit",
       dependencies = {
-        "nvim-lua/plenary.nvim", -- required
+        "nvim-lua/plenary.nvim",  -- required
         "sindrets/diffview.nvim", -- optional - Diff integration
 
         -- Only one of these is needed.
         "nvim-telescope/telescope.nvim", -- optional
-        "ibhagwan/fzf-lua",            -- optional
-        "echasnovski/mini.pick",       -- optional
+        "ibhagwan/fzf-lua",              -- optional
+        "echasnovski/mini.pick",         -- optional
       },
       config = true
     },
@@ -290,7 +271,7 @@ require('lazy').setup({
       opts = {
         style = "night",
         on_colors = function(colors)
-          colors.terminal.blue = "#5d59d4"      -- New color value
+          colors.terminal.blue = "#5d59d4"        -- New color value
           colors.terminal.blue_bright = "#5d59d4" -- New color value
           colors.terminal.cyan_bright = "#5d59d4" -- New color value
           colors.terminal.cyan_bright = "#5d59d4" -- New color value
@@ -802,7 +783,7 @@ cmp.setup {
 }
 
 
-  require("km")
+require("km")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

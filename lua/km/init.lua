@@ -1,6 +1,5 @@
 require("km.set")
 require("km.remap")
-require("km.lazygit")
 require("km.neogit")
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" },
