@@ -1,4 +1,8 @@
 vim.g.mapleader = " "
+
+vim.keymap.set("n", "<C-Left>", "<C-w>h", { desc = 'toggle to left window' })
+vim.keymap.set("n", "<C-Right>", "<C-w>l", { desc = 'toggle to right window' })
+
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = 'Current folder file explorer' })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
