@@ -12,11 +12,31 @@
 
 return {
     { 'ThePrimeagen/harpoon' },
-    {
+    --[[ {
         "sourcegraph/sg.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("sg").setup()
+        end,
+    },
+    ]] --
+    {
+        "github/copilot.vim",
+        config = function()
+            -- Disable default tab mapping
+            vim.g.copilot_no_tab_map = true
+
+            -- Map <C-J> to accept Copilot suggestions
+            vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { expr = true, silent = true })
+
+            -- Enable Copilot only for specific filetypes
+            vim.g.copilot_filetypes = {
+                ["*"] = false,
+                python = true,
+                javascript = true,
+                lua = true,
+                markdown = true,
+            }
         end,
     },
     { 'nvim-treesitter/nvim-treesitter-context' },
