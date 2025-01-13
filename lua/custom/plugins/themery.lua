@@ -6,6 +6,10 @@ return {
         { "rebelot/kanagawa.nvim",      name = "kanagawa",   priority = 1000 },
         { "Mofiqul/dracula.nvim",       name = "dracula",    priority = 1000 },
         { "catppuccin/nvim",            name = "catppuccin", priority = 1000 },
+        { 'Mofiqul/vscode.nvim',        name = 'vscode',     priority = 1000 },
+        { "folke/tokyonight.nvim",      name = "tokyonight", priority = 1000 },
+        { "rose-pine/neovim",           name = "rose-pine",  priority = 1000 },
+        { "navarasu/onedark.nvim",      name = "onedark",    priority = 1000 },
         { 'navarasu/onedark.nvim',      priority = 1000,     config = function() vim.cmd.colorscheme 'onedark' end, },
         {
             "folke/tokyonight.nvim",
@@ -14,7 +18,7 @@ return {
             opts = {
                 style = "night",
                 on_colors = function(colors)
-                    colors.terminal.blue = "#5d59d4" -- New color value
+                    colors.terminal.blue = "#5d59d4"        -- New color value
                     colors.terminal.blue_bright = "#5d59d4" -- New color value
                     colors.terminal.cyan_bright = "#5d59d4" -- New color value
                     colors.terminal.cyan_bright = "#5d59d4" -- New color value
@@ -25,6 +29,7 @@ return {
                 vim.cmd("colorscheme tokyonight") -- Apply the colorscheme
             end,
         },
+
         {
             -- rose-pine
             'rose-pine/neovim',
@@ -50,6 +55,7 @@ return {
                 { name = "kanagawa dragon",       colorscheme = "kanagawa-dragon", },
                 { name = "kanagawa-paper",        colorscheme = "kanagawa-paper", },
                 { name = "dracula",               colorscheme = "dracula", },
+                { name = "vscode",                colorscheme = "vscode", },
             },
             livePreview = true, -- Apply theme while picking. Default to true.
         })
