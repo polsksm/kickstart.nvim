@@ -33,6 +33,9 @@ return {
             vim.g.copilot_filetypes = {
                 ["*"] = false,
                 python = true,
+                c = true,
+                zig = true,
+                go = true,
                 javascript = true,
                 lua = true,
                 markdown = true,
