@@ -2,6 +2,8 @@ vim.g.mapleader = " "
 
 vim.keymap.set("n", "<C-Left>", "<C-w>h", { desc = 'toggle to left window' })
 vim.keymap.set("n", "<C-Right>", "<C-w>l", { desc = 'toggle to right window' })
+vim.keymap.set("n", "<C-Down>", "<C-w>j", { desc = 'toggle to bottom window' })
+vim.keymap.set("n", "<C-Up>", "<C-w>k", { desc = 'toggle to top window' })
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = 'Current folder file explorer' })
 
