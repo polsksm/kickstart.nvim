@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-
+vim.keymap.set("n", "<leader>b", "<cmd>highlight Normal guibg=#000000<CR>", { desc = 'force jet black bg' })
 vim.keymap.set("n", "<C-Left>", "<C-w>h", { desc = 'toggle to left window' })
 vim.keymap.set("n", "<C-Right>", "<C-w>l", { desc = 'toggle to right window' })
 vim.keymap.set("n", "<C-Down>", "<C-w>j", { desc = 'toggle to bottom window' })

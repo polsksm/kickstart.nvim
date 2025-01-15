@@ -59,24 +59,5 @@ return {
             },
             livePreview = true, -- Apply theme while picking. Default to true.
         })
-        --[[       require("themery").setup({
-            themes = {
-                { name = "onedark",               colorscheme = "onedark", },
-                { name = "rose-pine",             colorscheme = "rose-pine-main", },
-                { name = "rose-pine moon",        colorscheme = "rose-pine-moon", },
-                { name = "tokyonight-night",      colorscheme = "tokyonight-night", },
-                { name = "tokyonight-storm",      colorscheme = "tokyonight-storm", },
-                { name = "tokyonight-moon",       colorscheme = "tokyonight-moon", },
-                { name = "catppuccin mocha",      colorscheme = "catppuccin-mocha", },
-                { name = "catppuccin frappe",     colorscheme = "catppuccin-frappe", },
-                { name = "catppuccin macchiatto", colorscheme = "catppuccin-macchiato", },
-                { name = "kanagawa dragon",       colorscheme = "kanagawa-dragon", },
-                { name = "kanagawa-paper",        colorscheme = "kanagawa-paper", },
-                { name = "dracula",               colorscheme = "dracula", },
-            },
-            livePreview = true, -- Apply theme while picking. Default to true.
-        })
-            ]]
-        --
     end
 }
