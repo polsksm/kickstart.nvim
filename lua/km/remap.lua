@@ -1,4 +1,27 @@
 vim.g.mapleader = " "
+-- Keymap for debugging with nvim-dap
+local dap = require('dap')
+
+-- Set breakpoint with F9
+vim.keymap.set('n', '<F9>', function()
+    dap.toggle_breakpoint()
+end, { desc = "Toggle breakpoint" })
+
+-- Start debugging with F5
+vim.keymap.set('n', '<leader>dc', function()
+    dap.continue()
+end, { desc = "Start/continue debugging" })
+
+-- Step over with F10
+vim.keymap.set('n', '<leader>dso', function()
+    dap.step_over()
+end, { desc = "Step over" })
+
+-- Step into with F11
+vim.keymap.set('n', '<leader>dsi', function()
+    dap.step_into()
+end, { desc = "Step into" })
+
 vim.keymap.set("n", "<leader>b", "<cmd>highlight Normal guibg=#000000<CR>", { desc = 'force jet black bg' })
 vim.keymap.set("n", "<C-Left>", "<C-w>h", { desc = 'toggle to left window' })
 vim.keymap.set("n", "<C-Right>", "<C-w>l", { desc = 'toggle to right window' })
