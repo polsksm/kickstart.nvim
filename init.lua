@@ -615,22 +615,30 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
+local mason_lspconfig = require "mason-lspconfig"
 
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
+for server_name, _ in pairs(servers) do
+  -- clangd is configured in lua/km/init.lua (Neovim 0.11 style),
+  -- so skip it here to avoid double-config / overwriting settings.
+  if server_name ~= "clangd" then
+    local opts = {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
     }
-  end,
-}
+
+    vim.lsp.config(server_name, opts)
+  end
+end
+
+-- enable everything except clangd (clangd is enabled in lua/km/init.lua)
+vim.lsp.enable(vim.tbl_keys(servers))
+
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
