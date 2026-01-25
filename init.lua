@@ -277,7 +277,7 @@ require('lazy').setup({
     { import = 'custom.plugins' },
   },
   {})
-
+require("km.init")
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
