@@ -2,7 +2,7 @@ require("km.set")
 require("km.remap")
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" },
-    { pattern = "*.pc", command = "setlocal filetype=c"
+    { pattern = { "*.pc", "*.h" }, command = "setlocal filetype=c"
     })
 
 local lspconfig = require("lspconfig")
