@@ -63,3 +63,9 @@ vim.api.nvim_create_autocmd("FileType", {
         })
     end,
 })
+
+vim.api.nvim_create_user_command("FormatSQL", function()
+    local start_line = vim.fn.line("'<")
+    local end_line = vim.fn.line("'>")
+    vim.cmd(start_line .. "," .. end_line .. "!sql-formatter -l plsql")
+end, { range = true })
